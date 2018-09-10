@@ -22,13 +22,6 @@ export function setItem(this: any, key$: string, value: any, callback?: any) {
             sessionStorage.setItem(`${this._dbInfo.keyPrefix}${key$}`, value$);
             resolve(originalValue);
           } catch (e) {
-            // sessionStorage capacity exceeded.
-            if (
-              e.name === 'QuotaExceededError' ||
-              e.name === 'NS_ERROR_DOM_QUOTA_REACHED'
-            ) {
-              reject(e);
-            }
             reject(e);
           }
         }

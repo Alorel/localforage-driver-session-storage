@@ -1,11 +1,11 @@
 import {executeCallback} from 'localforage-driver-commons';
 
-export function key(this: any, ifx: number, callback?: any) {
+export function key(this: any, idx: number, callback?: any) {
   const promise = this.ready().then(() => {
     let result: any;
     try {
-      result = sessionStorage.key(ifx);
-    } catch (error) {
+      result = sessionStorage.key(idx);
+    } catch {
       result = null;
     }
 

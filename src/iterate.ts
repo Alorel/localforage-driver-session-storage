@@ -1,25 +1,13 @@
 import {executeCallback} from 'localforage-driver-commons';
+import {Store} from './Store';
 
 export function iterate(this: any, iterator: any, callback?: any) {
   const promise = this.ready().then(() => {
-    const keyPrefix = this._dbInfo.keyPrefix;
-    const keyPrefixLength = keyPrefix.length;
-    const length$ = sessionStorage.length;
+    const store = (<Store>this._dbInfo.mStore);
+    const keys = store.keys();
 
-    // We use a dedicated iterator instead of the `i` variable below
-    // so other keys we fetch in sessionStorage aren't counted in
-    // the `iterationNumber` argument passed to the `iterate()`
-    // callback.
-    //
-    // See: github.com/mozilla/localForage/pull/435#discussion_r38061530
-    let iterationNumber = 1;
-
-    for (let i = 0; i < length$; i++) {
-      const key$ = sessionStorage.key(i);
-      if (key$ === null || key$.indexOf(keyPrefix) !== 0) {
-        continue;
-      }
-      let value = sessionStorage.getItem(key$);
+    for (let i = 0; i < keys.length; i++) {
+      let value = store.get(keys[i]);
 
       // If a result was found, parse it from the serialized
       // string into a JS object. If result isn't truthy, the
@@ -29,13 +17,9 @@ export function iterate(this: any, iterator: any, callback?: any) {
         value = this._dbInfo.serializer.deserialize(value);
       }
 
-      value = iterator(
-        value,
-        key$.substring(keyPrefixLength),
-        iterationNumber++
-      );
+      value = iterator(value, keys[i], i + 1);
 
-      if (value !== void 0) {
+      if (value !== undefined) {
         return value;
       }
     }

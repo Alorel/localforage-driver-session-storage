@@ -1,11 +1,10 @@
 import {executeCallback, normaliseKey} from 'localforage-driver-commons';
+import {Store} from './Store';
 
 export function setItem(this: any, key$: string, value: any, callback?: any) {
   key$ = normaliseKey(key$);
 
   const promise = this.ready().then(() => {
-    // Convert undefined values to null.
-    // https://github.com/mozilla/localForage/pull/42
     if (value === undefined) {
       value = null;
     }
@@ -19,7 +18,7 @@ export function setItem(this: any, key$: string, value: any, callback?: any) {
           reject(error);
         } else {
           try {
-            sessionStorage.setItem(`${this._dbInfo.keyPrefix}${key$}`, value$);
+            (<Store>this._dbInfo.mStore).set(key$, value$);
             resolve(originalValue);
           } catch (e) {
             reject(e);

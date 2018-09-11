@@ -1,10 +1,11 @@
 import {executeCallback, normaliseKey} from 'localforage-driver-commons';
+import {Store} from './Store';
 
 export function getItem(this: any, key$: string, callback?: any) {
   key$ = normaliseKey(key$);
 
   const promise = this.ready().then(() => {
-    let result = sessionStorage.getItem(`${this._dbInfo.keyPrefix}${key$}`);
+    let result = (<Store>this._dbInfo.mStore).get(key$);
 
     // If a result was found, parse it from the serialized
     // string into a JS object. If result isn't truthy, the key

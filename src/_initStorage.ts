@@ -1,14 +1,15 @@
 import {clone, getKeyPrefix, LocalForageOptions, serialiser} from 'localforage-driver-commons';
-import {_support} from './_support';
+import {Store} from './Store';
 
 export function _initStorage(this: any, options?: LocalForageOptions): any {
-  if (!_support) {
-    return Promise.reject(new Error('localStorage not supported'));
-  }
+  const opts = options ? clone(options) : {};
+  const kp = getKeyPrefix(opts, this._defaultConfig);
+  const store = Store.resolve(kp);
 
-  this._dbInfo = options ? clone(options) : {};
+  this._dbInfo = opts;
   this._dbInfo.serializer = serialiser;
-  this._dbInfo.keyPrefix = getKeyPrefix(options || {}, this._defaultConfig);
+  this._dbInfo.keyPrefix = kp;
+  this._dbInfo.mStore = store;
 
   return Promise.resolve();
 }

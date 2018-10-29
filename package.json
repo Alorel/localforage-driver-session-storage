@@ -1,6 +1,6 @@
 {
   "name": "localforage-driver-session-storage",
-  "version": "1.0.2",
+  "version": "0.0.0",
   "description": "sessionStorage support for localForage",
   "keywords": [
     "localforage",

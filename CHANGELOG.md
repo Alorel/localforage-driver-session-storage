@@ -1,3 +1,11 @@
+## [1.0.3](https://github.com/Alorel/localforage-driver-session-storage.git/compare/1.0.2...1.0.3) (2018-10-29)
+
+
+### Maintenance
+
+* Add GitHub issue templates ([403793d](https://github.com/Alorel/localforage-driver-session-storage.git/commit/403793d))
+* Redistribute in flat ESM format ([79645e5](https://github.com/Alorel/localforage-driver-session-storage.git/commit/79645e5))
+
 ## [1.0.2](https://github.com/Alorel/localforage-driver-session-storage/compare/1.0.1...1.0.2) (2018-10-08)
 
 

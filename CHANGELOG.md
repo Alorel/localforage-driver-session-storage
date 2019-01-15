@@ -1,3 +1,15 @@
+## [1.0.4](https://github.com/Alorel/localforage-driver-session-storage/compare/1.0.3...1.0.4) (2019-01-15)
+
+
+### Bug Fixes
+
+* handle falsy 0 properly at getItem ([e967d63](https://github.com/Alorel/localforage-driver-session-storage/commit/e967d63))
+
+
+### Maintenance
+
+* update deps ([fc23d8e](https://github.com/Alorel/localforage-driver-session-storage/commit/fc23d8e))
+
 ## [1.0.3](https://github.com/Alorel/localforage-driver-session-storage.git/compare/1.0.2...1.0.3) (2018-10-29)
 
 
